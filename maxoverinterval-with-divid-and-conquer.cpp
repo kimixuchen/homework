@@ -56,7 +56,7 @@ void solve(int l, int r)
 int main()
 {
 	int a, b, size;
-	while(scanf("%d%d", &a, &b) && a!=0 && b!=0)
+	while(scanf("%d%d", &a, &b) && !(a==0 && b==0))
 	{
 		if(a<b)
 			intervals.push_back(make_pair(a, b));
