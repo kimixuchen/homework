@@ -1,0 +1,47 @@
+<html>
+	<head>
+
+	</head>
+
+	<body>
+	
+	<input name="coursefile" id="coursefile" type="file">
+
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#coursefile").on("change", function(){
+			var formData = new FormData();
+
+			formData.append("file", $("#coursefile")[0].files[0]);
+			formData.append("language", "eng");
+			formData.append("apikey", "2b3a9cb1d488957");
+			formData.append("isOverlayRequired", true);
+			$.ajax({
+				url: 'https://api.ocr.space/parse/image',
+				type: "POST",
+				data: formData,
+				dataType: 'json',
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(ocrParsedResult){
+					var parsedResults = ocrParsedResult["ParsedResults"];
+					var ocrExitCode = ocrParsedResult["OCRExitCode"];
+					var isErroredOnProcessing = ocrParsedResult["IsErroredOnProcessing"];
+					var errorMessage = ocrParsedResult["ErrorMessage"];
+					var errorDetails = ocrParsedResult["ErrorDetails"];
+
+					var processingTimeInMilliseconds = ocrParsedResult["ProcessingTimeInMilliseconds"];
+					alert(processingTimeInMilliseconds);
+					
+				}
+			});
+		});
+	});
+		
+		
+
+	</script>
+	</body>
+</html>
